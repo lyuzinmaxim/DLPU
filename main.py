@@ -4,7 +4,7 @@ from train import *
 import csv
 
 
-n = 10000
+n = 5000
 dataset = np.empty([n,256, 256])
 for i in range (n):
   size = np.random.permutation(np.arange(2,15,1))[0]
@@ -226,7 +226,7 @@ trained_model1,list_metric1,list_loss1 = model_train(
                                             model=model_DLPU,
                                             name='DLPU-GoogleCloud',
                                             batch_size=16,
-                                            total_epochs=100,
+                                            total_epochs=1000,
                                             learning_rate=0.0002,
                                             loss_freq=1,
                                             metric_freq=1,
