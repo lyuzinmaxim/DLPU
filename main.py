@@ -4,7 +4,7 @@ from train import *
 import csv
 
 
-n = 30000
+n = 20000
 dataset = np.empty([n,256, 256])
 for i in range (n):
   size = np.random.permutation(np.arange(2,15,1))[0]
