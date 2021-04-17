@@ -29,7 +29,7 @@ print(Y_test.shape,'Размерность тестовых картинок gro
 
 print(X_test.shape)
 
-model_DLPU = DLPU()
+model_PhUn = PhUn()
 
 def model_train(
     model,
@@ -223,8 +223,8 @@ def model_train(
     return model,metric_history,test_loss_history
 
 trained_model1,list_metric1,list_loss1 = model_train(
-                                            model=model_DLPU,
-                                            name='DLPU-GoogleCloud',
+                                            model=model_PhUn,
+                                            name='PhUn-GoogleCloud',
                                             batch_size=16,
                                             total_epochs=1000,
                                             learning_rate=0.0002,
