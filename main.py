@@ -2,9 +2,9 @@ from DLPU import *
 from dataset_generation import *
 from train import *
 import csv
+import os
 
-
-n = 5000
+n = 5
 dataset = np.empty([n,256, 256])
 for i in range (n):
   size = np.random.permutation(np.arange(2,15,1))[0]
@@ -29,7 +29,7 @@ print(Y_test.shape,'Размерность тестовых картинок gro
 
 print(X_test.shape)
 
-model_PhUn = PhUn()
+model_DLPU = DLPU()
 
 def model_train(
     model,
@@ -50,7 +50,8 @@ def model_train(
     1. trained model
     2. list of metric history for every "metric_freq" epoch
     3. list of losses history for every "loss_freq" epoch
-
+    4. list of train losses history for every "loss_freq" epoch
+    
     args:
     model - torch.nn.Module object - defined model 
     name - string, model checkpoints will be saved with this name
@@ -77,6 +78,8 @@ def model_train(
     
     metric_history = []
     test_loss_history = []
+    train_loss_history = []
+    train_loss_epoch = 0
     
     loss = torch.nn.L1Loss(size_average=None, reduce=None, reduction='mean')
     #loss = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')
@@ -106,6 +109,8 @@ def model_train(
           loss_value = loss(preds, Y_batch)
           loss_value.backward()
           
+          train_loss_epoch +=loss_value.item()
+          
           optimizer.step()
           ##### memory optimization start #####
           #GPUtil.showUtilization()
@@ -115,7 +120,11 @@ def model_train(
           
           #GPUtil.showUtilization()
           ##### memory optimization end #####
-
+      
+      train_loss_history.append(train_loss_epoch)
+      print('[LOSS TRAIN] mean value of MSE {:.4f} on train at epoch number {}'.format(train_loss_epoch,epoch))
+      train_loss_epoch = 0
+      
       if epoch % loss_freq == 0:
           test_per_batch = []
           print('[INFO] beginning to calculate loss')
@@ -145,7 +154,7 @@ def model_train(
           test_loss_epoch = sum(test_per_batch) / len(test_per_batch)
           test_loss_history.append(test_loss_epoch.tolist())
           
-          print('[LOSS] mean value of MSE {:.4f} at epoch number {}'.format(test_loss_epoch,epoch))    
+          print('[LOSS TEST] mean value of MSE {:.4f} at epoch number {}'.format(test_loss_epoch,epoch))    
       
       if epoch % metric_freq ==0:
           model.eval()
@@ -187,8 +196,8 @@ def model_train(
               'model_state_dict': model.state_dict(),
               'optimizer_state_dict': optimizer.state_dict(),
               'loss': loss
-              }, '/root/model/{}_checkpoint_{}'.format(name,(epoch+1)))
-          print('[SAVE] /root/model/{}_checkpoint_{} was saved'.format(name,(epoch+1)),)
+              }, '{}/{}_checkpoint_{}'.format(path,name,(epoch+1)))
+          print('[SAVE] {}/{}_checkpoint_{} was saved'.format(path,name,(epoch+1)),)
           
       if (epoch + 1) % lr_freq == 0:
           learning_rate /= 2
@@ -202,8 +211,8 @@ def model_train(
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': loss
                 #,'lr': learning_rate
-                }, '/root/model/{}_checkpoint_end'.format(name))
-    print('[END]/root/model/{}_checkpoint_end was saved'.format(name))
+                }, '{}/{}_checkpoint_end'.format(path,name))
+    print('[END]{}/{}_checkpoint_end was saved'.format(path,name))
     
     if device.type == 'cuda':
       end.record()
@@ -211,24 +220,60 @@ def model_train(
       print('Learning time is {:.1f} min'.format(start.elapsed_time(end)/(1000*60)))
     
     import csv
-    with open('/root/model/metric_{}.csv'.format(name), 'w', newline='') as myfile:
+    with open('{}/metric_{}.csv'.format(path,name), 'w', newline='') as myfile:
       wr = csv.writer(myfile, quoting=csv.QUOTE_NONE)
       wr.writerow(metric_history)
-    
-    with open('/root/model/loss_{}.csv'.format(name), 'w', newline='') as myfile:
+      print('Metric was saved')
+      
+    with open('{}/test_loss_{}.csv'.format(path,name), 'w', newline='') as myfile:
       wr = csv.writer(myfile, quoting=csv.QUOTE_NONE)
       wr.writerow(test_loss_history)
+      print('Test loss was saved')
+      
+    with open('{}/train_loss_{}.csv'.format(path,name), 'w', newline='') as myfile:
+      wr = csv.writer(myfile, quoting=csv.QUOTE_NONE)
+      wr.writerow(train_loss_history)
+      print('Train loss was saved')
+      
+    return model,metric_history,test_loss_history,train_loss_history
 
 
-    return model,metric_history,test_loss_history
 
-trained_model1,list_metric1,list_loss1 = model_train(
-                                            model=model_PhUn,
-                                            name='PhUn-GoogleCloud',
-                                            batch_size=16,
-                                            total_epochs=1000,
-                                            learning_rate=0.0002,
-                                            loss_freq=1,
-                                            metric_freq=1,
-                                            lr_freq=2,
-                                            save_freq=10)
+import hydra
+from omegaconf import DictConfig
+import os
+
+working_dir = os.getcwd()
+path = os.path.join(working_dir,"model")
+
+try:
+    os.mkdir(path)
+except OSError as error:
+    print('directory exists')
+
+print(f"The current base directory is {working_dir}")
+
+@hydra.main(config_path=os.path.join(working_dir,"config.yml"))
+def func(cfg: DictConfig):
+    working_dir = os.getcwd()
+    print(f"The current working directory is {working_dir}")
+
+    # To access elements of the config
+    print(f"The batch size is {cfg.batch_size}")
+    print(f"The learning rate is {cfg.lr}")
+    print(f"Total epochs: {cfg['total_epochs']}")
+    
+    trained_model,list_metric,list_test_loss,list_train_loss = model_train(
+                                                                    model=model_DLPU,
+                                                                    name=cfg.name,
+                                                                    batch_size=cfg.batch_size,
+                                                                    total_epochs=cfg.total_epochs,
+                                                                    learning_rate=cfg.lr,
+                                                                    loss_freq=cfg.loss_freq,
+                                                                    metric_freq=cfg.metric_freq,
+                                                                    lr_freq=cfg.lr_freq,
+                                                                    save_freq=cfg.save_freq)
+
+
+if __name__ == "__main__":
+    func()
