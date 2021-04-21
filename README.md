@@ -1,8 +1,7 @@
 # DLPU
 PyTorch model DLPU for phase unwrapping
 
-This is a PyTorch realisation of deep convolutional Unet-like network, described in arcticle "K. Wang, Y. Li, K. Qian, J. Di, and J. Zhao, “One-step robust deep
-learning phase unwrapping,” Opt. Express 27, 15100–15115 (2019).". 
+This is a PyTorch realisation of deep convolutional Unet-like network, described in arcticle [1]. 
 
 Original network was designed in TensorFlow framework, and this is the PyTorch version of it.
 
@@ -12,8 +11,7 @@ I've added following moments to the structure:
 otherwise unwrapping quality will be low
 
 # Dataset
-Dataset was generated synthetically according to article "K. Wang, Y. Li, K. Qian, J. Di, and J. Zhao, “One-step robust deep
-learning phase unwrapping,” Opt. Express 27, 15100–15115 (2019)." and "Spoorthi, G. E. et al. “PhaseNet 2.0: Phase Unwrapping of Noisy Data Based on Deep Learning Approach.” IEEE Transactions on Image Processing 29 (2020): 4862-4872."
+Dataset was generated synthetically according to articles [1,2]
 
 So, dataset data was generated using two methods (in equal proportions):
 
@@ -22,3 +20,8 @@ So, dataset data was generated using two methods (in equal proportions):
 
 ![example1](https://user-images.githubusercontent.com/73649419/115595429-95d36d00-a2df-11eb-8d83-1a629635a66f.png)
 ![example2](https://user-images.githubusercontent.com/73649419/115595433-97049a00-a2df-11eb-95d0-73c631d73240.png)
+
+# References
+1. K. Wang, Y. Li, K. Qian, J. Di, and J. Zhao, “One-step robust deep
+learning phase unwrapping,” Opt. Express 27, 15100–15115 (2019).
+2. Spoorthi, G. E. et al. “PhaseNet 2.0: Phase Unwrapping of Noisy Data Based on Deep Learning Approach.” IEEE Transactions on Image Processing 29 (2020): 4862-4872.
