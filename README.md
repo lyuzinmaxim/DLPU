@@ -21,6 +21,10 @@ So, dataset data was generated using two methods (in equal proportions):
 ![example1](https://user-images.githubusercontent.com/73649419/115595429-95d36d00-a2df-11eb-8d83-1a629635a66f.png)
 ![example2](https://user-images.githubusercontent.com/73649419/115595433-97049a00-a2df-11eb-95d0-73c631d73240.png)
 
+# Metrics
+I've implemented BEM (Binary Error Map), described in [3] with threshold 5%, according to formula
+BEM(m,n)= \begin{cases}1, & |  \Phi _{u}(m,n)- \Phi(m,n) | \leq [\Phi(m,n)-min(\Phi(m,n))] \times 0.05 \\0, & otherwise\end{cases}
+
 # References
 1. K. Wang, Y. Li, K. Qian, J. Di, and J. Zhao, “One-step robust deep
 learning phase unwrapping,” Opt. Express 27, 15100–15115 (2019).
