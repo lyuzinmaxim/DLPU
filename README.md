@@ -12,6 +12,7 @@ I've added following moments to the structure:
 otherwise unwrapping quality will be low
 2. In article there are some unclear moments: neural net structure contains of "five repeated uses of two 3×3 convolution operations (each followed by a BN and a ReLU), a residual block between the two convolution operations,..."
 So, according to the article it should be CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's not clear. In contracting path (down) it's possible to make "good" residual connection, as shown below
+
 ![ResBlock_contracting](https://user-images.githubusercontent.com/73649419/116404556-6d93c300-a837-11eb-92ba-64a560383338.jpg)
 
 But autors write, that in expansive path there is similar structure CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's impossible to use residual connection below (figure from article)
