@@ -5,6 +5,7 @@ This is a PyTorch realisation of deep convolutional Unet-like network, described
 
 Original network was designed in TensorFlow framework, and this is the PyTorch version of it.
 
+# Changes
 I've added following moments to the structure:
 
 1. Replication padding mode in conv3x3 blocks, because experiments have shown that it's important at the edges of phase maps,
@@ -16,6 +17,7 @@ So, according to the article it should be CONV3x3->BN->ReLU -> Residual Block(??
 But autors write, that in expansive path there is similar structure CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's impossible to use residual connection below (figure from article)
 ![1](https://user-images.githubusercontent.com/73649419/116405461-599c9100-a838-11eb-9405-8d951600ab35.jpg)
 because first CONV3x3 reduces channels by two, and second CONV3x3 reduces again channels by two, and that makes no sence (and possibility, because number of channels don't match) to use residual connection here
+
 ![ResBlock_expansive](https://user-images.githubusercontent.com/73649419/116405910-d7f93300-a838-11eb-9e8d-352c3719344e.jpg)
 
 
