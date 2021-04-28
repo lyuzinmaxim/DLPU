@@ -9,6 +9,15 @@ I've added following moments to the structure:
 
 1. Replication padding mode in conv3x3 blocks, because experiments have shown that it's important at the edges of phase maps,
 otherwise unwrapping quality will be low
+2. In article there are some unclear moments: neural net structure contains of "five repeated uses of two 3×3 convolution operations (each followed by a BN and a ReLU), a residual block between the two convolution operations,..."
+So, according to the article it should be CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's not clear. In contracting path (down) it's possible to make "good" residual connection, as shown below
+![ResBlock_contracting](https://user-images.githubusercontent.com/73649419/116404556-6d93c300-a837-11eb-92ba-64a560383338.jpg)
+
+But autors write, that in expansive path there is similar structure CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's impossible to use residual connection below (figure from article)
+![1](https://user-images.githubusercontent.com/73649419/116405461-599c9100-a838-11eb-9405-8d951600ab35.jpg)
+because first CONV3x3 reduces channels by two, and second CONV3x3 reduces again channels by two, and that makes no sence (and possibility, because number of channels don't match) to use residual connection here
+![ResBlock_expansive](https://user-images.githubusercontent.com/73649419/116405910-d7f93300-a838-11eb-9e8d-352c3719344e.jpg)
+
 
 # Dataset
 Dataset was generated synthetically according to articles [1,2]
@@ -20,6 +29,12 @@ So, dataset data was generated using two methods (in equal proportions):
 
 ![Example1](https://user-images.githubusercontent.com/73649419/116145971-9fe1db00-a6e6-11eb-9ff3-7afc4982f8a3.png)
 ![Example2](https://user-images.githubusercontent.com/73649419/116145975-a1130800-a6e6-11eb-8b57-5cbf2e168ac9.png)
+
+# Model
+Model can be shown as following:
+In original paper there is unclear moment: "residual block (see Ref.
+20 for details) between the two convolution operations"
+![DLPU structure](https://user-images.githubusercontent.com/73649419/116402297-e8a7aa00-a834-11eb-901d-d400f1b46a65.png)
 
 
 
