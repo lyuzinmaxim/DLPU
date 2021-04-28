@@ -37,11 +37,11 @@ class ResidualBlock(nn.Module):
         residual = out
         out = self.bn1(out)
         out = self.relu(out)
-        out += residual
         out = self.conv2(out)
         out = self.bn2(out)
         #if self.downsample:
         #    residual = self.downsample(x)
+	out += residual
         out = self.relu(out)
         #out = self.downsampling(out)
         return out
