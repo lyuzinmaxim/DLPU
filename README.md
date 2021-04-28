@@ -37,7 +37,7 @@ So, dataset data was generated using two methods (in equal proportions):
 Model can be shown as following:
 In original paper there is unclear moment: "residual block (see Ref.
 20 for details) between the two convolution operations"
-![DLPU structure](https://user-images.githubusercontent.com/73649419/116408415-6ec6ef00-a83b-11eb-9b4c-4612f8f62bcc.png)
+![DLPU structure](https://user-images.githubusercontent.com/73649419/116408415-6ec6ef00-a83b-11eb-9b4c-4612f8f62bcc.png =250x250)
 
 
 # Metrics
