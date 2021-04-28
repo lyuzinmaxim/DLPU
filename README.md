@@ -16,9 +16,10 @@ So, according to the article it should be CONV3x3->BN->ReLU -> Residual Block(??
 
   ![ResBlock_contracting](https://user-images.githubusercontent.com/73649419/116404556-6d93c300-a837-11eb-92ba-64a560383338.jpg)
 
-But autors write, that in expansive path (up) there is similar structure CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's impossible to use residual   connection below (figure from article) because first CONV3x3 reduces channels by two, and second CONV3x3 reduces again channels by two, and that makes no sence (and possibility, because numbers of channels don't match) to use residual connection here
-      ![1](https://user-images.githubusercontent.com/73649419/116405461-599c9100-a838-11eb-9405-8d951600ab35.jpg)
-      ![ResBlock_expansive](https://user-images.githubusercontent.com/73649419/116405910-d7f93300-a838-11eb-9e8d-352c3719344e.jpg)
+But autors write, that in expansive path (up) there is similar structure CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's impossible to use residual   connection below (figure from article) because first CONV3x3 reduces channels by two, and second CONV3x3 reduces again channels by two, and that makes no sence (and possibility, because numbers of channels don't match) to use residual connection here like in contracting path. But i've tried to make following residual connection.
+
+![1](https://user-images.githubusercontent.com/73649419/116405461-599c9100-a838-11eb-9405-8d951600ab35.jpg)
+![ResBlock_expansive](https://user-images.githubusercontent.com/73649419/116407708-b6994680-a83a-11eb-9e97-451050b29b8f.jpg)
 
 
 # Dataset
