@@ -14,13 +14,14 @@ otherwise unwrapping quality will be low
 So I made residual connections only for contracting path
 So, according to the article it should be CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's not clear. In contracting path (down) it's possible to make "good" residual connection, as shown below
 
-<img align="center" width="500" height="150" src="https://user-images.githubusercontent.com/73649419/116404556-6d93c300-a837-11eb-92ba-64a560383338.jpg">
+<img align="center" width="700" height="150" src="https://user-images.githubusercontent.com/73649419/116404556-6d93c300-a837-11eb-92ba-64a560383338.jpg">
 
-But autors write, that in expansive path (up) there is similar structure CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's impossible to use residual   connection below (figure from article) because first CONV3x3 reduces channels by two, and second CONV3x3 reduces again channels by two, and that makes no sence (and possibility, because numbers of channels don't match) to use residual connection here like in contracting path. But i've tried to make following residual connection.
+But autors write, that in expansive path (up) there is similar structure CONV3x3->BN->ReLU -> Residual Block(???) -> CONV3x3->BN->ReLU and it's impossible to use residual   connection below (figure from article) because first CONV3x3 reduces channels by two, and second CONV3x3 reduces again channels by two, and that makes no sence (and possibility, because numbers of channels don't match) to use residual connection here like in contracting path. 
 
-<img src="https://user-images.githubusercontent.com/73649419/116405461-599c9100-a838-11eb-9405-8d951600ab35.jpg" data-canonical-src="https://user-images.githubusercontent.com/73649419/116405461-599c9100-a838-11eb-9405-8d951600ab35.jpg" width="500" height="250" align="center" />
+<img src="https://user-images.githubusercontent.com/73649419/116405461-599c9100-a838-11eb-9405-8d951600ab35.jpg" data-canonical-src="https://user-images.githubusercontent.com/73649419/116405461-599c9100-a838-11eb-9405-8d951600ab35.jpg" width="700" height="400" align="center" />
+But i've tried to make following residual connection.
 
-<img src="https://user-images.githubusercontent.com/73649419/116407708-b6994680-a83a-11eb-9e97-451050b29b8f.jpg" data-canonical-src="https://user-images.githubusercontent.com/73649419/116407708-b6994680-a83a-11eb-9e97-451050b29b8f.jpg" width="500" height="150" align="center" />
+<img src="https://user-images.githubusercontent.com/73649419/116407708-b6994680-a83a-11eb-9e97-451050b29b8f.jpg" data-canonical-src="https://user-images.githubusercontent.com/73649419/116407708-b6994680-a83a-11eb-9e97-451050b29b8f.jpg" width="700" height="150" align="center" />
 
 
 # Dataset
