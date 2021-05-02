@@ -1,0 +1,5 @@
+GPUtil==1.4.0
+torch==1.8.1
+np==1.19.5
+matplotlib==3.2.2
+cv2==4.1.2
