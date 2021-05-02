@@ -53,7 +53,6 @@ class ResidualBlockUp(nn.Module):
         self.conv2 = conv3x3(2 * out_channels, out_channels)
         self.bn2 = nn.BatchNorm2d(out_channels)
 
-
     def forward(self, x):
         out = self.conv1(x)
         residual = out
@@ -62,10 +61,7 @@ class ResidualBlockUp(nn.Module):
         out += residual
         out = self.conv2(out)
         out = self.bn2(out)
-        # if self.downsample:
-        #    residual = self.downsample(x)
         out = self.relu(out)
-        # out = self.downsampling(out)
         return out
 
 
