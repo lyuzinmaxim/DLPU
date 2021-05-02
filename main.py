@@ -7,8 +7,18 @@ import os
 n = 5
 dataset = np.empty([n,256, 256])
 for i in range (n):
-  size = np.random.permutation(np.arange(2,15,1))[0]
-  dataset[i] = create_dataset_element(size,256,4,20)
+    if i%2 == 0:
+        size = np.random.permutation(np.arange(2,15,1))[0]
+        dataset[i] = create_dataset_element(size,256,4,20)
+    else:
+        num_gauss = np.random.permutation(np.arange(1,7,1))[0]
+        dataset[i] = make_gaussian(
+                  num_gauss,
+                  sigma_min=1,
+                  sigma_max=4,
+                  shift_max=4,
+                  magnitude_min=2,
+                  magnitude_max=20)
  
 dataset_torch = torch.from_numpy(dataset)
 dataset_unsqueezed = dataset_torch.unsqueeze(1).float()
@@ -219,7 +229,7 @@ def model_train(
       torch.cuda.synchronize()
       print('Learning time is {:.1f} min'.format(start.elapsed_time(end)/(1000*60)))
     
-    import csv
+
     with open('{}/metric_{}.csv'.format(path,name), 'w', newline='') as myfile:
       wr = csv.writer(myfile, quoting=csv.QUOTE_NONE)
       wr.writerow(metric_history)
