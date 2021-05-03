@@ -6,7 +6,7 @@ import os
 import hydra
 from omegaconf import DictConfig
 
-n = 50
+n = 5000
 dataset = np.empty([n, 256, 256])
 for i in range(n):
     if i % 2 == 0:
