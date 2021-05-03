@@ -47,6 +47,16 @@ I've implemented BEM (Binary Error Map), described in [3] with threshold 5%, acc
 
 ![render](https://user-images.githubusercontent.com/73649419/116073854-a5650400-a699-11eb-9dbd-30510f355bb6.png)
 
+# Training info
+In original paper authors describe train hyperparameters as follows:
+loss: pixelwise MSE
+optimizer: Adam 
+learning rate: 10e-3
+
+My training:
+Training with MSE converges ~10x times faster than with MAE
+SGD with momentum=0.9 converges ~10x times faster than with adam (in both variations learning rate was 10e-4)
+
 
 # References
 1. K. Wang, Y. Li, K. Qian, J. Di, and J. Zhao, “One-step robust deep
