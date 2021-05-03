@@ -49,8 +49,11 @@ I've implemented BEM (Binary Error Map), described in [3] with threshold 5%, acc
 
 # Training info
 In original paper authors describe train hyperparameters as follows:
+
 loss: pixelwise MSE
+
 optimizer: Adam 
+
 learning rate: 10e-3
 
 My training:
