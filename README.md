@@ -60,6 +60,91 @@ My training:
 Training with MSE converges ~10x times faster than with MAE
 SGD with momentum=0.9 converges ~10x times faster than with adam (in both variations learning rate was 10e-4)
 
+# Parameters counting
+
++------------------------+------------+
+|        Modules         | Parameters |
++------------------------+------------+
+|  block1.conv1.weight   |     72     |
+|   block1.bn1.weight    |     8      |
+|    block1.bn1.bias     |     8      |
+|  block1.conv2.weight   |    576     |
+|   block1.bn2.weight    |     8      |
+|    block1.bn2.bias     |     8      |
+|  block2.conv1.weight   |    1152    |
+|   block2.bn1.weight    |     16     |
+|    block2.bn1.bias     |     16     |
+|  block2.conv2.weight   |    2304    |
+|   block2.bn2.weight    |     16     |
+|    block2.bn2.bias     |     16     |
+|  block3.conv1.weight   |    4608    |
+|   block3.bn1.weight    |     32     |
+|    block3.bn1.bias     |     32     |
+|  block3.conv2.weight   |    9216    |
+|   block3.bn2.weight    |     32     |
+|    block3.bn2.bias     |     32     |
+|  block4.conv1.weight   |   18432    |
+|   block4.bn1.weight    |     64     |
+|    block4.bn1.bias     |     64     |
+|  block4.conv2.weight   |   36864    |
+|   block4.bn2.weight    |     64     |
+|    block4.bn2.bias     |     64     |
+|  block5.conv1.weight   |   73728    |
+|   block5.bn1.weight    |    128     |
+|    block5.bn1.bias     |    128     |
+|  block5.conv2.weight   |   147456   |
+|   block5.bn2.weight    |    128     |
+|    block5.bn2.bias     |    128     |
+|  block6.conv1.weight   |   294912   |
+|   block6.bn1.weight    |    256     |
+|    block6.bn1.bias     |    256     |
+|  block6.conv2.weight   |   589824   |
+|   block6.bn2.weight    |    256     |
+|    block6.bn2.bias     |    256     |
+| block_up1.conv1.weight |   294912   |
+|  block_up1.bn1.weight  |    128     |
+|   block_up1.bn1.bias   |    128     |
+| block_up1.conv2.weight |   73728    |
+|  block_up1.bn2.weight  |     64     |
+|   block_up1.bn2.bias   |     64     |
+| block_up2.conv1.weight |   73728    |
+|  block_up2.bn1.weight  |     64     |
+|   block_up2.bn1.bias   |     64     |
+| block_up2.conv2.weight |   18432    |
+|  block_up2.bn2.weight  |     32     |
+|   block_up2.bn2.bias   |     32     |
+| block_up3.conv1.weight |   18432    |
+|  block_up3.bn1.weight  |     32     |
+|   block_up3.bn1.bias   |     32     |
+| block_up3.conv2.weight |    4608    |
+|  block_up3.bn2.weight  |     16     |
+|   block_up3.bn2.bias   |     16     |
+| block_up4.conv1.weight |    4608    |
+|  block_up4.bn1.weight  |     16     |
+|   block_up4.bn1.bias   |     16     |
+| block_up4.conv2.weight |    1152    |
+|  block_up4.bn2.weight  |     8      |
+|   block_up4.bn2.bias   |     8      |
+| block_up5.conv1.weight |    288     |
+|  block_up5.bn1.weight  |     2      |
+|   block_up5.bn1.bias   |     2      |
+| block_up5.conv2.weight |     18     |
+|  block_up5.bn2.weight  |     1      |
+|   block_up5.bn2.bias   |     1      |
+|   up_trans_1.weight    |   131072   |
+|    up_trans_1.bias     |    128     |
+|   up_trans_2.weight    |   16384    |
+|    up_trans_2.bias     |     64     |
+|   up_trans_3.weight    |    4096    |
+|    up_trans_3.bias     |     32     |
+|   up_trans_4.weight    |    1024    |
+|    up_trans_4.bias     |     16     |
+|   up_trans_5.weight    |    256     |
+|    up_trans_5.bias     |     8      |
+|       out.weight       |     64     |
+|        out.bias        |     1      |
++------------------------+------------+
+Total Trainable Params: 1824937
 
 # References
 1. K. Wang, Y. Li, K. Qian, J. Di, and J. Zhao, “One-step robust deep
