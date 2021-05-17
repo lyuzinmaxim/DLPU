@@ -65,6 +65,7 @@ SGD with momentum=0.9 converges ~10x times faster than with adam (in both variat
 
 # Parameters counting
 
+
 Total Trainable Params: 1824937
 
 # References
