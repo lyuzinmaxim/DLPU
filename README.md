@@ -61,7 +61,7 @@ Training with MSE converges ~10x times faster than with MAE
 SGD with momentum=0.9 converges ~10x times faster than with adam (in both variations learning rate was 10e-4)
 
 
-(!) Succeed train to zero cost (0.025) SGR m=0.9, lr=0.0001
+(!) Succeed train to zero cost (0.025) SGR m=0.9, lr=0.0001 (really slow)
 
 # Parameters counting
 
