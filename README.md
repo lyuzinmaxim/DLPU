@@ -68,6 +68,10 @@ SGD with momentum=0.9 converges ~10x times faster than with adam (in both variat
 
 Total Trainable Params: 1824937
 
+# Todo's
+
+1. code refactoring
+
 # References
 1. K. Wang, Y. Li, K. Qian, J. Di, and J. Zhao, “One-step robust deep
 learning phase unwrapping,” Opt. Express 27, 15100–15115 (2019).
